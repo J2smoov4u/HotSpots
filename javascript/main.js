@@ -70,9 +70,9 @@ function renderVenues(venues) {
 function renderForecast(days) {
   $weatherDivs.forEach(($day, index) => {
     let weatherContent =
-      '<h2> High: ' + day[index].day.maxtemp_c + '</h2>' +
-      '<h2> Low: ' + day[index].day.mintemp_c + '</h2>' +
-      '<img src="http://' + day[index].day.condition.icon +
+      '<h2> High: ' + days[index].day.maxtemp_c + '</h2>' +
+      '<h2> Low: ' + days[index].day.mintemp_c + '</h2>' +
+      '<img src="http://' + days[index].day.condition.icon +
       '" class="weathericon" />' +
       '<h2>' + weekDays[(new Date(days[index].date)).getDay()] + '</h2>';
     $day.append(weatherContent);
@@ -85,7 +85,7 @@ function executeSearch() {
   $destination.empty();
   $container.css("visibility", "visible");
   getVenues().then(venues => renderVenues(venues));
-  getForecast();
+  getForecast().then(forecast => renderForecast(forecast));
   return false;
 }
 
